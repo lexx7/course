@@ -9,10 +9,13 @@
 
 namespace Course;
 
+use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Zend\Console\Adapter\AdapterInterface as Console;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
-class Module
+
+class Module implements ConsoleUsageProviderInterface
 {
     public function onBootstrap(MvcEvent $e)
     {
@@ -34,6 +37,57 @@ class Module
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
             ),
+        );
+    }
+
+    public function getServiceConfig()
+    {
+        return array(
+            'invokables' => array(
+                'serviceCurrency' => 'Course\Service\Currency',
+                'Course\Service\Logs' => 'Course\Service\Logs',
+            ),
+            'factories' => array(
+                'CacheAdapter' =>function($serviceManager) {
+                    $config = $serviceManager->get('config');
+
+                    $host = isset($config['memcached']['host']) ? $config['memcached']['host'] : 'localhost';
+                    $port = isset($config['memcached']['port']) ? $config['memcached']['port'] : '11211';
+
+                    $cache  = new \Zend\Cache\Storage\Adapter\Memcached();
+                    $cache->setOptions(array(
+                        'servers'   => array(
+                            array(
+                                $host,
+                                $port
+                            )
+                        ),
+                        'namespace'  => 'MYMEMCACHEDNAMESPACE',
+                        'liboptions' => array (
+                            'COMPRESSION' => true,
+                            'binary_protocol' => true,
+                            'no_block' => true,
+                            'connect_timeout' => 100
+                        )
+                    ));
+
+                    $plugin = new \Zend\Cache\Storage\Plugin\ExceptionHandler();
+                    $plugin->getOptions()->setThrowExceptions(false);
+                    $cache->addPlugin($plugin);
+
+                    return $cache;
+                }
+            )
+        );
+    }
+
+    /**
+     * This method is defined in ConsoleUsageProviderInterface
+     */
+    public function getConsoleUsage(Console $console)
+    {
+        return array(
+            'valute download' => 'Download courses valute',
         );
     }
 }

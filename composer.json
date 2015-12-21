@@ -6,6 +6,7 @@
         "doctrine/dbal": ">=2.5",
         "doctrine/doctrine-orm-module": "dev-master",
         "doctrine/migrations": "dev-master",
+        "doctrine/doctrine-mongo-odm-module": "dev-master",
         "widmogrod/zf2-assetic-module": "dev-master",
 
         "zendframework/zend-developer-tools": "dev-master"

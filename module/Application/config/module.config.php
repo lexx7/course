@@ -62,6 +62,9 @@ return array(
         'factories' => array(
             'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
         ),
+        'aliases' => array(
+            'doctrine-document' => 'doctrine.documentmanager.odm_default',
+        )
     ),
     'translator' => array(
         'locale' => 'en_US',

@@ -13,7 +13,8 @@ return array(
 
         'AsseticBundle',
         'DoctrineModule',
-        'DoctrineORMModule',
+//        'DoctrineORMModule',
+        'DoctrineMongoODMModule',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

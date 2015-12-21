@@ -18,4 +18,19 @@ return array(
             ),
         )
     ),
+    'console' => array(
+        'router' => array(
+            'routes' => array(
+                'valute' => array(
+                    'options' => array(
+                        'route'    => 'valute download',
+                        'defaults' => array(
+                            'controller' => 'Course\Controller\Console',
+                            'action'     => 'download'
+                        )
+                    )
+                )
+            )
+        )
+    )
 );
