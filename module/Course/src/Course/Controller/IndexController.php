@@ -10,6 +10,7 @@
 namespace Course\Controller;
 
 use Course\Service\Currency;
+use Course\Service\Logs;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
@@ -33,13 +34,20 @@ class IndexController extends AbstractActionController
 
         $course = array();
 
-        if($request->isGet()) {
+        if($request->isPost()) {
             /** @var Currency $service */
             $service = $this->getServiceLocator()->get('serviceCurrency');
 
-            $course = $service->course($request->getQuery()->toArray());
+            $course = $service->course($request->getPost()->toArray());
         }
 
         return new JsonModel($course);
+    }
+
+    public function __destruct()
+    {
+        /** @var Logs $service */
+        $service = $this->getServiceLocator()->get('Course\Service\Logs');
+        $service->write($this->getRequest(), $this->getResponse());
     }
 }
