@@ -87,7 +87,7 @@ class Module implements ConsoleUsageProviderInterface
     public function getConsoleUsage(Console $console)
     {
         return array(
-            'valute download' => 'Download courses valute',
+            'currency download' => 'Download courses currency',
         );
     }
 }
