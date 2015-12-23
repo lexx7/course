@@ -8,6 +8,8 @@
         "doctrine/migrations": "dev-master",
         "doctrine/doctrine-mongo-odm-module": "dev-master",
         "widmogrod/zf2-assetic-module": "dev-master",
+        "synergy/common": "dev-master",
+        "synergy/synergydatagrid": "dev-master",
 
         "zendframework/zend-developer-tools": "dev-master"
     }

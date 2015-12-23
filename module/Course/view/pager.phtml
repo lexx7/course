@@ -1,0 +1,34 @@
+<?php
+$url = $this->url('course',
+    array('action'=>'logs')).'/page/';
+?>
+
+    <div class="pagination pagination-centered">
+        <ul class="pager">
+            <!--<div style="float:left">-->
+            <!-- Previous page link -->
+            <?php if (isset($this->previous)): ?>
+                <li><a href="<?= $url.'1'; ?>">&lt;&lt; Первая&nbsp;&nbsp;</a></li>
+                <li><a href="<?= $url.$this->previous; ?>">&lt; Предыдущая&nbsp;&nbsp;</a></li>
+            <?php else: ?>
+                <li class="disabled"><a href="#">&lt;&lt; Первая&nbsp;&nbsp;</a></li>
+                <li class="disabled"><a href="#">&lt; Предыдущая&nbsp;&nbsp;</a></li>
+            <?php endif; ?>
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <?php if ($page != $this->current): ?>
+                    <li><a href="<?= $url.$page; ?>">
+                        <?= $page; ?>
+                    </a></li>
+                <?php else: ?>
+                    <li class="active"><a href="#"><?= $page; ?></a></li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+            <?php if (isset($this->next)): ?>
+                <li><a href="<?= $url.$this->next; ?>">&nbsp;Следующая &gt;</a></li>
+                <li><a href="<?= $url.$this->pageCount; ?>">&nbsp;Последняя &gt;&gt;</a></li>
+            <?php else: ?>
+                <li class="disabled"><a href="#">&nbsp;Следующая &gt;&nbsp;</a></li>
+                <li class="disabled"><a href="#">&nbsp;Последняя &gt;&gt;&nbsp;</a></li>
+            <?php endif; ?>
+        </ul>
+    </div>

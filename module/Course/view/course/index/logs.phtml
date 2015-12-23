@@ -1,0 +1,33 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: lex
+ * Date: 23.12.2015
+ * Time: 21:36
+ */
+
+$this->headTitle('Логи');
+?>
+
+<table class="table">
+    <tr>
+        <td>Дата/Время</td>
+        <td>IP</td>
+        <td>Время исполнения</td>
+        <td>Запрос</td>
+        <td>Ответ</td>
+    </tr>
+    <?php
+    /** @var \Course\Document\LogsClient $item */
+    foreach($this->content as $item) :?>
+    <tr>
+        <td><?php echo $item->getDatetime()->format('d-m-y H:i:s') ?></td>
+        <td><?php echo $item->getIpAddress() ?></td>
+        <td><?php echo $item->getDuration() ?></td>
+        <td><?php echo $item->getRequest() ?></td>
+        <td><?php echo $item->getResponse() ?></td>
+    </tr>
+    <?php endforeach; ?>
+</table>
+
+<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pager.phtml'); ?>

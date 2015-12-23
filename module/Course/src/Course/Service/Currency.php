@@ -21,7 +21,7 @@ class Currency implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
 
-    protected $_link = 'http://www.cbr.ru/scripts/XML_daily.asp';
+    protected $_link = 'http://www.cbr.ru/scripts/XML_daily.asp?date=';
     protected $_document = 'Course\Document\Courses';
     protected $_currencyConvert = 'USD';
 
@@ -38,7 +38,7 @@ class Currency implements ServiceLocatorAwareInterface
      */
     public function download()
     {
-        $downloadXml = file_get_contents($this->_link);
+        $downloadXml = file_get_contents($this->_link . (new \DateTime())->format('d.m.Y'));
 
         $this->_xml = new \SimpleXMLElement($downloadXml);
 
