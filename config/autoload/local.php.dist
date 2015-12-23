@@ -12,4 +12,22 @@
  */
 
 return array(
+'doctrine' => array(
+        'connection' => array(
+            'odm_default' => array(
+                'server'           => 'localhost',
+                'port'             => '27017',
+                'connectionString' => null,
+                'user'             => null,
+                'password'         => null,
+//                'dbname'           => 'zf2mongo',
+                'options'          => array()
+            ),
+        ),
+        'configuration' => [
+            'odm_default' => [
+                'default_db' => 'zf2mongo'
+            ]
+        ]
+    ),
 );
